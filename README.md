@@ -20,4 +20,5 @@
       备注：redux只负责管理状态，至于状态的改变驱动着页面的更新需要我们自己写。
 ## 2.求和案例_redux完整版
     新增文件：
-      1.count_actions.js 专门用于创建actiond
+      1.count_actions.js 专门用于创建actiond对象
+      2.constant.js 放置由于编码疏忽写错action中的type
