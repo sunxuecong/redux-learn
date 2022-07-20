@@ -1,36 +1,65 @@
 /**
- * 这个文件是count组件的容器组件
+ * 这个文件是count组件的容器组件和 UI 组件一体的组件
  */
-import Count from "../../../src/components/Count";
-import {createIncreamentAction,createDecreamentAction,createIncreamentAsyncAction}from '../../redux/count_action'
+
+// 引入 action
+import {createIncreamentAction,createDecreamentAction,createIncreamentAsyncAction,} from "../../redux/count_action";
 //引入connect用来创建容器组件
 import { connect } from "react-redux";
-//此处左手是组件Count右手是redux的store 但是此处不能直接传store得从容器组件的父组件以props的方式传入
+import React, { Component } from "react";
 
-// +++++++++++++++++++++++++++++++++++++++一般写法+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-//此函数的返回值作为状态(state)传给了UI组件,等同于<Count state = {}/> 返回值是一个对象
-// 返回一个的对象中的key 作为传递给UI组件的props的key,value作为传递给UI组件props的value
-// 此函能接收到一个参数为dispatch是react-redux给传入的store的state
-function mapStateToProps(state){
-  return  {
-    count:state
+// 创建一个 UI 组件
+class Count extends Component {
+  //加
+  increment = () => {
+    const { value } = this.selectNumber;
+    this.props.createIncreamentAction(value * 1);
+  };
+  //减
+  decrement = () => {
+    const { value } = this.selectNumber;
+    this.props.createDecreamentAction(value * 1);
+  };
+  //奇数再加
+  incrementIfOdd = () => {
+    const { value } = this.selectNumber;
+    let count = this.props.count;
+    if (count % 2 != 0) {
+      this.props.createIncreamentAction(value * 1);
+    }
+  };
+  //异步加
+  incrementAsync = () => {
+    const { value } = this.selectNumber;
+    this.props.createIncreamentAsyncAction(value * 1, 500);
+  };
+  render() {
+    return (
+      <div>
+        <h1>当前求和为{this.props.count}</h1>
+        <select ref={(c) => (this.selectNumber = c)}>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+        </select>
+        &nbsp;
+        <button onClick={this.increment}>加</button>&nbsp;
+        <button onClick={this.decrement}>减</button>&nbsp;
+        <button onClick={this.incrementIfOdd}>当前和为奇数再加</button>&nbsp;
+        <button onClick={this.incrementAsync}>异步加</button>
+      </div>
+    );
   }
 }
-//此函数的返回值作为状态(state)传给了UI组件,等同于<Count state = {}/>
-// 返回一个的对象中的key 作为传递给UI组件的props的key,value作为传递给UI组件props的value的操作方法
-// 此函能接收到一个参数为dispatch是react-redux给传入的store的dispatch
-function mapDispathToProps(dispatch){
-  return {
-    jia: (value) => dispatch(createIncreamentAction(value)),              
-    jian: value => dispatch(createDecreamentAction(value)),
-    jiaAsync: (value,time) => dispatch(createIncreamentAsyncAction(value,time))
-  }
-}
+
 //创建并且暴露一个容器组件
-export default connect(mapStateToProps,mapDispathToProps)(Count)
-
-// +++++++++++++++++++++++++++++++++++++++精简的写法+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-//更推荐精简写法,普通写法mapDispathToProps是一个函数.精简写法是一个对象.
-// //精简的写法
-// export default connect(state => ({count:state}),{jia:createIncreamentAction,jian:createDecreamentAction,jiaAsync:createIncreamentAsyncAction})(Count)
+export default connect(
+  (state) => ({
+    count: state,
+  }),
+  {
+    createIncreamentAction,
+    createDecreamentAction,
+    createIncreamentAsyncAction,
+  }
+)(Count);
