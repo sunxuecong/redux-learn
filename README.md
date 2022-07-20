@@ -30,3 +30,13 @@
       (3).异步任务有结果后,分发一个同步的 action去真正操作数据。
       (4).备注:异步 action 不是必须要写的,完全可以自己等待异步任务的结果了再去分发同步 action。
 
+## 4.求和案例_react_redux基本使用
+      (1).明确两个概念:
+          1).UI组件:不能使用任何的redux的api,只负责页面的呈现,交互等.
+          2).容器组件负责:负责和redux通信,将结果交给UI组件.
+      (2).如何创建一个容器组件--靠react-redux的connect函数.
+            connent(mapStateToProps,mapDispathToProps)(UI组件)
+            -mapStateToProps:映射状态,返回值是一个对象
+            -mapDispatchToProps:映射操作方法的状态,返回值是一个对象.
+      (3).备注:容器组件中的store是靠props传进去的.而不是在组件中直接引入.
+      (4).备注:mapDispatchToProps也可以是一个对象(精简写法)
