@@ -7,7 +7,7 @@
 // applyMiddleware本身为一个函数,传入 thunk 作为参数
 import { legacy_createStore as createStore ,applyMiddleware} from "redux";
 //引入为 Count 服务的 reduce
-import contReducer from './count_reducer'
+import contReducer from './reducers/count'
 //引入 redux-thunk用于支持异步 action
 import thunk from "redux-thunk";
 

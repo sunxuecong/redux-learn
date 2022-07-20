@@ -3,7 +3,7 @@
  */
 
 // 引入 action
-import {createIncreamentAction,createDecreamentAction,createIncreamentAsyncAction,} from "../../redux/count_action";
+import {createIncreamentAction,createDecreamentAction,createIncreamentAsyncAction,} from "../../redux/actions/count"
 //引入connect用来创建容器组件
 import { connect } from "react-redux";
 import React, { Component } from "react";
@@ -36,7 +36,8 @@ class Count extends Component {
   render() {
     return (
       <div>
-        <h1>当前求和为{this.props.count}</h1>
+        <h1>你好我是 count组件</h1>
+        <h2>当前求和为{this.props.count}</h2>
         <select ref={(c) => (this.selectNumber = c)}>
           <option value="1">1</option>
           <option value="2">2</option>

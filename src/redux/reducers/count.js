@@ -3,7 +3,7 @@
  * reducer 会接到2个参数，分别为：之前的状态(preState)和动作对象(action)
  */
 
-import {DECREMENT,INCREMENT} from '../redux/constant'
+import {DECREMENT,INCREMENT} from '../constant'
 // 初始化的值
 const initState = 99
 
