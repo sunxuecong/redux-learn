@@ -1,6 +1,6 @@
 import './App.css';
-import Count from './containers/Count'; //引入Count组件
-import Person from './containers/Person';//引入Person组件
+import Count from './containers/Count';
+import Person from './containers/Person';
 
 function App() {
   return (

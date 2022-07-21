@@ -34,5 +34,5 @@ class Person extends Component {
     )
   }
 }
-export default connect(state => ({personList:state.person,count:state.count,
+export default connect(state => ({personList:state.personReducer,count:state.countReducer,
 }),{creatAddPersonAction} )(Person)
